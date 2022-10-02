@@ -43,7 +43,21 @@ class Employee:
         return total
 
     def __str__(self):
-        return self.name
+        contract = ""
+        commission = ""
+        total_pay = self.get_pay()
+
+        if self.contract_type == Employee.HOURLY_CONTRACT:
+            contract = "contract of {} hours at {}/hour".format(self.hours, self.contract_rate)
+        else:
+            contract = "monthly salary of {}".format(self.contract_rate)
+
+        if self.commission_type == Employee.CONTRACT_COMMISSION:
+            commission = " and receives a commission for {} contract(s) at {}/contract".format(self.contracts, self.commission_rate)
+        elif self.commission_type == Employee.BONUS_COMMISSION:
+            commission = " and receives a bonus commission of {}".format(self.bonus)
+
+        return "{} works on a {}{}.  Their total pay is {}.".format(self.name, contract, commission, total_pay)
 
 
 # Billie works on a monthly salary of 4000.  Their total pay is 4000.
